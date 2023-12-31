@@ -154,6 +154,10 @@
     <Image Include="Images\IMG_1190.jpg" />
     <Image Include="Images\IMG_1193.jpg" />
     <Image Include="Images\IMG_1200.jpg" />
+    <Image Include="OpenGLTestWindow_TqUo5o4EhB.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="README.md" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
