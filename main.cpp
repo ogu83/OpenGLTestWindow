@@ -176,6 +176,51 @@ GLuint loadTexture(const char* imagePath) {
 	return textureID;
 }
 
+void drawSpaceShip() {
+	glBegin(GL_TRIANGLES);
+
+	// Body of the spaceship
+	glColor3f(0.5f, 0.5f, 0.5f);  // Gray color
+	glVertex2f(0.0f, 0.0f);        // Center
+	glVertex2f(-0.1f, -0.2f);      // Bottom-left
+	glVertex2f(0.1f, -0.2f);       // Bottom-right
+
+	// Left wing
+	glColor3f(0.0f, 1.0f, 0.0f);  // Green color
+	glVertex2f(-0.1f, 0.0f);       // Middle-left
+	glVertex2f(-0.3f, 0.2f);       // Top-left
+	glVertex2f(-0.1f, -0.2f);      // Bottom-left
+
+	// Right wing
+	glColor3f(0.0f, 1.0f, 0.0f);  // Green color
+	glVertex2f(0.1f, 0.0f);        // Middle-right
+	glVertex2f(0.3f, 0.2f);        // Top-right
+	glVertex2f(0.1f, -0.2f);       // Bottom-right
+
+	glEnd();
+}
+
+
+void drawCar() {
+	glBegin(GL_QUADS);
+
+	// Body of the car
+	glColor3f(1.0f, 0.0f, 0.0f);  // Red color
+	glVertex2f(-0.4f, -0.1f);      // Bottom-left
+	glVertex2f(0.4f, -0.1f);       // Bottom-right
+	glVertex2f(0.3f, 0.1f);        // Top-right
+	glVertex2f(-0.3f, 0.1f);       // Top-left
+
+	// Roof of the car
+	glColor3f(0.0f, 0.0f, 1.0f);  // Blue color
+	glVertex2f(-0.3f, 0.1f);       // Bottom-left
+	glVertex2f(0.3f, 0.1f);        // Bottom-right
+	glVertex2f(0.2f, 0.4f);        // Top-right
+	glVertex2f(-0.2f, 0.4f);       // Top-left
+
+	glEnd();
+}
+
 void drawBar() {
 	glBegin(GL_QUADS);
 	glColor3f(1.0f, 0.0f, 0.0f); // Set color to red
@@ -204,6 +249,26 @@ void drawBricks() {
 			drawRectangle(brickX, brickY, brickWidth, brickHeight);
 		}
 	}
+}
+
+void drawGrid() {
+	glColor3f(0.5f, 0.5f, 0.5f);  // Gray color
+
+	glBegin(GL_LINES);
+
+	// Draw horizontal lines
+	for (float y = -1.0f; y <= 1.0f; y += 0.2f) {
+		glVertex2f(-1.0f, y);
+		glVertex2f(1.0f, y);
+	}
+
+	// Draw vertical lines
+	for (float x = -1.0f; x <= 1.0f; x += 0.2f) {
+		glVertex2f(x, -1.0f);
+		glVertex2f(x, 1.0f);
+	}
+
+	glEnd();
 }
 
 void drawImageOnBricks(std::vector<GLuint> textureIDs) {
@@ -294,48 +359,52 @@ int main() {
 	while (!glfwWindowShouldClose(window)) {
 		glClear(GL_COLOR_BUFFER_BIT);
 
-		circleX += circleXSpeed;
-		circleY += circleYSpeed;
+		//circleX += circleXSpeed;
+		//circleY += circleYSpeed;
 
-		// Check for collision with rectangle
-		if (checkCollision(circleX, circleY, circleRadius, rectX, rectY, rectWidth, rectHeight)) {
-			circleYSpeed *= -1; // Invert Y speed for bounce
-		}
+		//// Check for collision with rectangle
+		//if (checkCollision(circleX, circleY, circleRadius, rectX, rectY, rectWidth, rectHeight)) {
+		//	circleYSpeed *= -1; // Invert Y speed for bounce
+		//}
 
-		//Check for collision with bricks
-		if (checkCollisionBricks(circleX, circleY, circleRadius)) { 
-			circleYSpeed *= -1;
-			circleX += circleXSpeed;
-			circleY += circleYSpeed;
-		}
-		
-		if (checkCollisionBricks(circleX, circleY, circleRadius)) {
-			circleXSpeed *= -1;
-			circleYSpeed *= -1;
-		}
+		////Check for collision with bricks
+		//if (checkCollisionBricks(circleX, circleY, circleRadius)) { 
+		//	circleYSpeed *= -1;
+		//	circleX += circleXSpeed;
+		//	circleY += circleYSpeed;
+		//}
+		//
+		//if (checkCollisionBricks(circleX, circleY, circleRadius)) {
+		//	circleXSpeed *= -1;
+		//	circleYSpeed *= -1;
+		//}
 
-		// Bounce when reaching screen boundaries
-		if (circleX - circleRadius <= -1.0f || circleX + circleRadius >= 1.0f) {
-			circleXSpeed *= -1;
-		}
+		//// Bounce when reaching screen boundaries
+		//if (circleX - circleRadius <= -1.0f || circleX + circleRadius >= 1.0f) {
+		//	circleXSpeed *= -1;
+		//}
 
-		if (circleY + circleRadius >= 1.0f) {
-			circleYSpeed *= -1;
-		}
+		//if (circleY + circleRadius >= 1.0f) {
+		//	circleYSpeed *= -1;
+		//}
 
-		if (circleY - circleRadius <= -1.0f) {
-			//TODO: Game Over
-		}
+		//if (circleY - circleRadius <= -1.0f) {
+		//	//TODO: Game Over
+		//}
 
-		// Draw bricks
-		//drawBricks();
-		drawImageOnBricks(textures);
+		//// Draw bricks
+		////drawBricks();
+		//drawImageOnBricks(textures);
 
-		//Draw ball
-		drawCircle(circleX, circleY, circleRadius, circle_seg);
+		////Draw ball
+		//drawCircle(circleX, circleY, circleRadius, circle_seg);
 
-		// Draw the movable 2D bar as rectangle
-		drawBar();
+		//// Draw the movable 2D bar as rectangle
+		//drawBar();
+
+		//drawSpaceShip();
+		//drawCar();
+		drawGrid();
 
 		glfwSwapBuffers(window);
 		glfwPollEvents();
