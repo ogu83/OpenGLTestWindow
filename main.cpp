@@ -359,48 +359,48 @@ int main() {
 	while (!glfwWindowShouldClose(window)) {
 		glClear(GL_COLOR_BUFFER_BIT);
 
-		//circleX += circleXSpeed;
-		//circleY += circleYSpeed;
+		circleX += circleXSpeed;
+		circleY += circleYSpeed;
 
-		//// Check for collision with rectangle
-		//if (checkCollision(circleX, circleY, circleRadius, rectX, rectY, rectWidth, rectHeight)) {
-		//	circleYSpeed *= -1; // Invert Y speed for bounce
-		//}
+		// Check for collision with rectangle
+		if (checkCollision(circleX, circleY, circleRadius, rectX, rectY, rectWidth, rectHeight)) {
+			circleYSpeed *= -1; // Invert Y speed for bounce
+		}
 
-		////Check for collision with bricks
-		//if (checkCollisionBricks(circleX, circleY, circleRadius)) { 
-		//	circleYSpeed *= -1;
-		//	circleX += circleXSpeed;
-		//	circleY += circleYSpeed;
-		//}
-		//
-		//if (checkCollisionBricks(circleX, circleY, circleRadius)) {
-		//	circleXSpeed *= -1;
-		//	circleYSpeed *= -1;
-		//}
+		//Check for collision with bricks
+		if (checkCollisionBricks(circleX, circleY, circleRadius)) { 
+			circleYSpeed *= -1;
+			circleX += circleXSpeed;
+			circleY += circleYSpeed;
+		}
+		
+		if (checkCollisionBricks(circleX, circleY, circleRadius)) {
+			circleXSpeed *= -1;
+			circleYSpeed *= -1;
+		}
 
-		//// Bounce when reaching screen boundaries
-		//if (circleX - circleRadius <= -1.0f || circleX + circleRadius >= 1.0f) {
-		//	circleXSpeed *= -1;
-		//}
+		// Bounce when reaching screen boundaries
+		if (circleX - circleRadius <= -1.0f || circleX + circleRadius >= 1.0f) {
+			circleXSpeed *= -1;
+		}
 
-		//if (circleY + circleRadius >= 1.0f) {
-		//	circleYSpeed *= -1;
-		//}
+		if (circleY + circleRadius >= 1.0f) {
+			circleYSpeed *= -1;
+		}
 
-		//if (circleY - circleRadius <= -1.0f) {
-		//	//TODO: Game Over
-		//}
+		if (circleY - circleRadius <= -1.0f) {
+			//TODO: Game Over
+		}
 
-		//// Draw bricks
-		////drawBricks();
-		//drawImageOnBricks(textures);
+		// Draw bricks
+		//drawBricks();
+		drawImageOnBricks(textures);
 
-		////Draw ball
-		//drawCircle(circleX, circleY, circleRadius, circle_seg);
+		//Draw ball
+		drawCircle(circleX, circleY, circleRadius, circle_seg);
 
-		//// Draw the movable 2D bar as rectangle
-		//drawBar();
+		// Draw the movable 2D bar as rectangle
+		drawBar();
 
 		//drawSpaceShip();
 		//drawCar();
